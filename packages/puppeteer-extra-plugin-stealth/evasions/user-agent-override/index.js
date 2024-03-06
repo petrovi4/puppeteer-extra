@@ -85,11 +85,11 @@ class Plugin extends PuppeteerExtraPlugin {
     let uaVersion = '';
     if(ua.includes('Chrome/')) {
       let matches = ua.match(/Chrome\/([\d|.]+)/)
-      if(matches.length >= 2) uaVersion = matches[1]
+      if(matches && matches.length >= 2) uaVersion = matches[1]
     }
     else {
       let matches = (await page.browser().version()).match(/\/([\d|.]+)/)
-      if(matches.length >= 2) uaVersion = matches[1]
+      if(matches && matches.length >= 2) uaVersion = matches[1]
     }
 
     // Get platform identifier (short or long version)
