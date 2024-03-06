@@ -64,7 +64,7 @@ class Plugin extends PuppeteerExtraPlugin {
 
   async onPageCreated(page) {
     // Determine the full user agent string, strip the "Headless" part
-    let ua = this.opts.userAgent;
+    let ua = this.opts.userAgent ?? 'Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion';
     if(!ua) {
       try{
         let browser = page.browser()
