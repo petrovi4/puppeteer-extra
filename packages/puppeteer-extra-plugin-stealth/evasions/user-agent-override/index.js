@@ -82,9 +82,15 @@ class Plugin extends PuppeteerExtraPlugin {
     }
 
     // Full version number from Chrome
-    const uaVersion = ua.includes('Chrome/')
-      ? ua.match(/Chrome\/([\d|.]+)/)[1]
-      : (await page.browser().version()).match(/\/([\d|.]+)/)[1]
+    let uaVersion = '';
+    if(ua.includes('Chrome/')) {
+      let matches = ua.match(/Chrome\/([\d|.]+)/)
+      if(matches.length >= 2) uaVersion = matches[1]
+    }
+    else {
+      let matches = (await page.browser().version()).match(/\/([\d|.]+)/)
+      if(matches.length >= 2) uaVersion = matches[1]
+    }
 
     // Get platform identifier (short or long version)
     const _getPlatform = (extended = false) => {
